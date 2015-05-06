@@ -21,6 +21,7 @@ import copy
 # Ideally, things that end up in #3 are added to the upstream miniAOD production
 # eventually
 
+import os.path
 import FWCore.ParameterSet.Config as cms
 import FWCore.ParameterSet.VarParsing as opts
 
@@ -32,9 +33,14 @@ options.register('maxEvts',
                  opts.VarParsing.varType.int,
                  'Number of events to process')
 
+# Run locally if needed, remotely otherwise
+if os.path.exists('ntuple_test_miniaod_skim.root'):
+    inputDefault = 'file:ntuple_test_miniaod_skim.root'
+else:
+    inputDefault = '/store/mc/Phys14DR/TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/MINIAODSIM/PU30bx50_PHYS14_25_V1-v1/00000/003B6371-8D81-E411-8467-003048F0E826.root'
+
 options.register('sample',
-        'file:skim.root',
-                 #'/store/mc/Phys14DR/TTJets_MSDecaysCKM_central_Tune4C_13TeV-madgraph-tauola/MINIAODSIM/PU30bx50_PHYS14_25_V1-v1/00000/003B6371-8D81-E411-8467-003048F0E826.root',
+                 inputDefault,
                  opts.VarParsing.multiplicity.singleton,
                  opts.VarParsing.varType.string,
                  'Sample to analyze')
