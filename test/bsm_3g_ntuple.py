@@ -253,7 +253,7 @@ process.genParticleUserData = cms.EDProducer(
 #
 # Step 4) Configure the output file content (different file since it's so long)
 #
-process.load("Analysis.EDNtuple.EventContent_cfi")
+process.load("BSM3GAna.EDNtuple.EventContent_cfi")
 
 #
 # Output File Configuration
