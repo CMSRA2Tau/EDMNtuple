@@ -1,3 +1,3 @@
 #Automatically created by SCRAM
 import os
-__path__.append(os.path.dirname(os.path.abspath(__file__).rsplit('/Analysis/EDNtuple/',1)[0])+'/cfipython/osx108_amd64_gcc481/Analysis/EDNtuple')
+__path__.append(os.path.dirname(os.path.abspath(__file__).rsplit('/BSM3GAna/EDMNtuple/',1)[0])+'/cfipython/slc6_amd64_gcc491/BSM3GAna/EDMNtuple')
