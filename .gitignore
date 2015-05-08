@@ -58,4 +58,4 @@ target/
 
 # Don't add test root input/output files
 ntuple_test_miniaod_skim.root
-bsm_3g_ntuple.root
+bsm3g_edmntuple.root
