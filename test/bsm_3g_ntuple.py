@@ -1,6 +1,6 @@
 import copy
 
-# bsm_3g_ntuple.py - Generates EDNTuples (hopefully) compatible with all bsm3g
+# bsm_3g_ntuple.py - Generates EDMNTuples (hopefully) compatible with all bsm3g
 #       analyses.
 # 
 # How does this work? In order, we would like to do the following things
@@ -46,7 +46,7 @@ options.register('sample',
                  'Sample to analyze')
 
 options.register('outputLabel',
-                 'bsm_3g_ntuple.root',
+                 'bsm3g_edmntuple.root',
                  opts.VarParsing.multiplicity.singleton,
                  opts.VarParsing.varType.string,
                  'Output label')
@@ -88,10 +88,10 @@ tauLabel = 'slimmedTaus'
 triggerLabel = 'TriggerResults'
 prescaleLabel = 'patTrigger'
 objects = 'selectedPatTrigger'
-electronVetoIdMapLabel   = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V1-miniAOD-standalone-veto")
-electronLooseIdMapLabel  = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V1-miniAOD-standalone-loose")
-electronMediumIdMapLabel = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V1-miniAOD-standalone-medium")
-electronTightIdMapLabel  = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V1-miniAOD-standalone-tight")
+electronVetoIdMapLabel   = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V2-standalone-veto")
+electronLooseIdMapLabel  = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V2-standalone-loose")
+electronMediumIdMapLabel = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V2-standalone-medium")
+electronTightIdMapLabel  = ("egmGsfElectronIDs:cutBasedElectronID-PHYS14-PU20bx25-V2-standalone-tight")
 # muon cuts
 muonPtMin              = 10.0
 muonEtaMax             = 2.4
@@ -118,7 +118,7 @@ Pvtx_vtxdxy_max = 24.0
 #
 # Boilerplate includes
 #
-process = cms.Process("bsm3gEDNtuples")
+process = cms.Process("bsm3gEDMNtuples")
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.categories.append('HLTrigReport')
 ### Output Report
@@ -186,18 +186,18 @@ process.skimmedPatPhotons = cms.EDFilter(
 #
 # Electron ID
 #
-#from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
-#process.load("RecoEgamma.ElectronIdentification.egmGsfElectronIDs_cfi")
-#process.egmGsfElectronIDs.physicsObjectSrc = cms.InputTag('slimmedElectrons')
+from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
+process.load("RecoEgamma.ElectronIdentification.egmGsfElectronIDs_cfi")
+process.egmGsfElectronIDs.physicsObjectSrc = cms.InputTag('slimmedElectrons')
 #from PhysicsTools.SelectorUtils.centralIDRegistry import central_id_registry
-#process.egmGsfElectronIDSequence = cms.Sequence(process.egmGsfElectronIDs)
+process.egmGsfElectronIDSequence = cms.Sequence(process.egmGsfElectronIDs)
 ## Define which IDs we want to produce
 ## Each of these two example IDs contains all four standard
 ## cut-based ID working points (only two WP of the PU20bx25 are actually used here).
-#my_id_modules = ['RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_PHYS14_PU20bx25_V1_miniAOD_cff']
+my_id_modules = ['RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_PHYS14_PU20bx25_V2_cff']
 ##Add them to the VID producer
-#for idmod in my_id_modules:
-#    setupAllVIDIdsInModule(process,idmod,setupVIDElectronSelection)
+for idmod in my_id_modules:
+    setupAllVIDIdsInModule(process,idmod,setupVIDElectronSelection)
 
 
 
@@ -253,7 +253,7 @@ process.genParticleUserData = cms.EDProducer(
 #
 # Step 4) Configure the output file content (different file since it's so long)
 #
-process.load("BSM3GAna.EDNtuple.EventContent_cfi")
+process.load("BSM3GAna.EDMNtuple.EventContent_cfi")
 
 #
 # Output File Configuration
