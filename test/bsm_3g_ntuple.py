@@ -139,7 +139,7 @@ process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.GlobalTag.globaltag = options.globalTag
-
+process.Tracer = cms.Service("Tracer")
 #
 # Step 1) Object cut definitions
 #

@@ -153,10 +153,10 @@ electronVars = (
 )
 
 jetVars = ( 
-#    cms.PSet(
-#        tag = cms.untracked.string("CSV"),
-#        quantity = cms.untracked.string("bDiscriminator(\"combinedSecondaryVertexV1BJetTags\")")
-#    ),
+    cms.PSet(
+        tag = cms.untracked.string("CSV"),
+        quantity = cms.untracked.string("bDiscriminator(\"combinedSecondaryVertexV1BJetTags\")")
+    ),
     cms.PSet(
         tag = cms.untracked.string("NeutralHadronEnergy"),
         quantity = cms.untracked.string("neutralHadronEnergy()")
@@ -188,7 +188,7 @@ jetVars = (
 #    cms.PSet(
 #        tag = cms.untracked.string("PtUncorrected"),
 #        quantity = cms.untracked.string("correctedJet('Uncorrected').pt()")
-#    ),
+#j    ),
 )
 
 tauVars = ( ) 
@@ -219,8 +219,20 @@ pileupVars = (
         quantity = cms.untracked.string("bextVertex")
     ),
 ) 
-genParticleVars = ( )
-
+genParticleVars = ( 
+        cms.PSet(
+            tag = cms.untracked.string("ID"),
+            quantity = cms.untracked.string("pdgId")
+        ),
+        cms.PSet(
+            tag = cms.untracked.string("Status"),
+            quantity = cms.untracked.string("status")
+        ),
+        cms.PSet(
+            tag = cms.untracked.string("MomID"),
+            quantity = cms.untracked.string("?numberOfMothers>0 ? mother(0).pdgId : -900")
+        )
+    )
 
 # Tuple process generation
 #
